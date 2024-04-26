@@ -1,12 +1,16 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const cors = require('cors');
+
+
 const app = express();
 
-// Configure Multer to store uploaded files in the 'uploads' directory
+app.use(cors());
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'images');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -15,10 +19,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Define a route for file uploads
+app.get('/',(req,res)=>{
+  res.send("this is the server page")
+})
+
+
 app.post('/upload', upload.single('model'), (req, res) => {
-  // Handle the uploaded file here
-  // You can access the file details from req.file
+
   const file = req.file;
   if (!file) {
     return res.status(400).send('No file uploaded.');

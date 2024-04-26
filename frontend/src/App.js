@@ -14,6 +14,11 @@ function App() {
 
       <div className="upload">
         <FileUpload />
+
+      </div>
+
+      <div className="renderScene">
+
       </div>
 
     </div>
