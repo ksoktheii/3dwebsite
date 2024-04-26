@@ -1,43 +1,32 @@
-import *as THREE from 'three'
+import React, { useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+// import * as THREE from 'three';
 
-//canvas 
-const canvas = document.querySelector('canvas.webgl')
+const RotatingBox = () => {
+  const meshRef = useRef();
 
-//scene
-const scene = new THREE.Scene()
+  useFrame(() => {
+    // Rotate the mesh on the x and y axes
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.rotation.y += 0.01;
+  });
 
-//object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color:0Xff0000 })
-const mesh = new THREE.Mesh(geometry, material)
-// mesh.position.x =0.7
-// mesh.position.x= -0.6
-// mesh.position.y=-1
-scene.add(mesh)
+  return (
+    <mesh ref={meshRef} position={[0, 0, 0]}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshBasicMaterial color={0xff0000} />
+    </mesh>
+  );
+};
 
+const SceneRender = () => {
+  return (
+    <Canvas>
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <RotatingBox />
+    </Canvas>
+  );
+};
 
-//sizes
-const sizes = {
-    width:700,
-    height: 500
-}
-
-
-//camera
-const camera =new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z =3
-
-scene.add(camera)
-
-mesh.position.set( 0.7, -0.6, 1 )
-mesh.position.normalize()
-console.log(mesh.position.length());
-
-//renderer
-const renderer = new THREE.WebGLRenderer({
-    canvas:canvas
-})
-
-renderer.setSize(sizes.width,sizes.height)
-
-renderer.render(scene, camera)
+export default SceneRender;

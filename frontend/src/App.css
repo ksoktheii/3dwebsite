@@ -2,8 +2,10 @@
   margin: 0;
   padding:0;
 }
+
 .App {
   text-align: center;
+  background-color: aqua;
 }
 
 .navigation {
@@ -48,3 +50,15 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* scene */
+.renderScene {
+  width: 50vw; /* Adjust as needed */
+  height: 60vh; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

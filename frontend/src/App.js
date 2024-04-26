@@ -1,5 +1,7 @@
 import './App.css';
 import FileUpload from './fileupload';
+import SceneRender from './scenerender';
+
 
 function App() {
  
@@ -18,7 +20,7 @@ function App() {
       </div>
 
       <div className="renderScene">
-
+          < SceneRender />
       </div>
 
     </div>
