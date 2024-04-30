@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const allowedFileTypes = ['obj', 'fbx', 'dae', 'stl', 'glTF'];
+const allowedFileTypes = ['obj', 'fbx', 'dae', 'stl', 'gltf'];
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -9,12 +9,14 @@ const FileUpload = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    
 
     if (file) {
       const fileType = file.name.split('.').pop().toLowerCase();
       if (allowedFileTypes.includes(fileType)) {
         setSelectedFile(file);
-        setErrorMessage('');
+        setErrorMessage ('')
+        
       } else {
         setSelectedFile(null);
         setErrorMessage('Invalid file format, try again');
@@ -47,7 +49,7 @@ const FileUpload = () => {
 
   return (
     <div className="uploadModel">
-      <input type="file" accept=".obj, .glTF, .fbx, .dae, .stl, .glb" onChange={handleFileChange} />
+      <input type="file" accept=".obj, .gltf, .fbx, .dae, .stl, .glb" onChange={handleFileChange} />
       {errorMessage && <p>{errorMessage}</p>}
       {selectedFile && <p>{selectedFile.name}</p>}
       <button type="button" onClick={handleModelUpload}>Upload 3D Model</button>
